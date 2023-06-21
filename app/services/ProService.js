@@ -1,9 +1,23 @@
 import { AppState } from "../AppState.js";
 
+function _calculateClickValue() {
+  let clickValue = AppState.proPoints;
+  AppState.upgrades.forEach((u) => {
+    clickValue += u.multiplier * u.quantity;
+  });
+  AppState.clickValue = clickValue;
+  console.log(AppState.clickValue);
+  return clickValue;
+}
+
 class ProService {
   mine() {
-    AppState.proPoints++;
+    AppState.proPoints = _calculateClickValue();
     console.log(AppState.proPoints);
+  }
+
+  getClickValue() {
+    _calculateClickValue();
   }
 }
 

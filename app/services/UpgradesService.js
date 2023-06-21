@@ -1,4 +1,5 @@
 import { AppState } from "../AppState.js";
+import { proService } from "./ProService.js";
 
 class UpgradesService {
   buyUpgrade(upgradeName) {
@@ -7,7 +8,11 @@ class UpgradesService {
     if (AppState.proPoints >= foundUpgrade.price) {
       AppState.proPoints -= foundUpgrade.price;
       foundUpgrade.quantity++;
+      // NOTE we can call from one service to another
+      proService.getClickValue();
       console.log(foundUpgrade);
+
+      // NOTE something changed within our array of upgrade objects but AppState.on didn't see it, so we need to let the watcher know a change has happened
       AppState.emit("upgrades");
     } else {
       window.alert(

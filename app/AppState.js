@@ -43,6 +43,8 @@ class ObservableAppState extends EventEmitter {
     ),
   ];
 
+  clickValue = 1;
+
   // NOTE Used to load initial data
   init() {}
 }

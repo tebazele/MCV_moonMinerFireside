@@ -6,11 +6,16 @@ function _draw() {
   setText("procrastination-value", AppState.proPoints);
 }
 
+function _drawClickValue() {
+  setText("click-value", AppState.clickValue);
+}
+
 export class ProController {
   constructor() {
     console.log("hey there from the proController");
     _draw();
     AppState.on("proPoints", _draw);
+    AppState.on("clickValue", _drawClickValue);
   }
 
   mine() {
